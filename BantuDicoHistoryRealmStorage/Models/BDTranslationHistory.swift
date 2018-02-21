@@ -10,6 +10,7 @@ import Foundation
 
 public struct BDTranslationHistory {
     
+    let identifier: String
     let sourceWord: String
     let sourceLanguage: String
     let destinationLanguage: String
@@ -18,9 +19,10 @@ public struct BDTranslationHistory {
 }
 
 extension BDTranslationHistory {
-    init(realmTranslationResult: BDRealmTranslationResult) {
+    init(realmTranslationResult: BDRealmTranslationHistory) {
+        identifier = realmTranslationResult.identifier
         sourceWord = realmTranslationResult.sourceWord
-        sourceLanguage = realmTranslationResult.sourceWord
+        sourceLanguage = realmTranslationResult.sourceLanguage
         destinationLanguage = realmTranslationResult.destinationLanguage
         isFavorite = realmTranslationResult.isFavorite
         translations = Array(realmTranslationResult.translations).sorted()
