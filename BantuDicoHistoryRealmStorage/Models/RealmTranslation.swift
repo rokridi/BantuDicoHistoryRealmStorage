@@ -1,5 +1,5 @@
 //
-//  BDRealmTranslationResult.swift
+//  RealmTranslation.swift
 //  BantuDicoHistoryRealmStorage
 //
 //  Created by Mohamed Aymen Landolsi on 19/02/2018.
@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class BDRealmTranslationHistory: Object {
+class RealmTranslation: Object {
     
     @objc dynamic var word = ""
     @objc dynamic var language = ""
@@ -35,7 +35,7 @@ class BDRealmTranslationHistory: Object {
     }
 }
 
-extension BDRealmTranslationHistory {
+extension RealmTranslation {
     
     func setCompoundWord(word: String) {
         self.word = word

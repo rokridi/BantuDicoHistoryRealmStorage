@@ -1,5 +1,5 @@
 //
-//  BDTranslationHistory.swift
+//  BDRealmTranslation.swift
 //  BantuDicoHistoryRealmStorage
 //
 //  Created by Mohamed Aymen Landolsi on 19/02/2018.
@@ -8,18 +8,18 @@
 
 import Foundation
 
-public struct BDTranslationHistory {
+public struct BDRealmTranslation {
     
     let identifier: String
     let word: String
     let language: String
     let translationLanguage: String
-    public let isFavorite: Bool
+    let isFavorite: Bool
     let translations: [String]
 }
 
-extension BDTranslationHistory {
-    init(realmTranslation: BDRealmTranslationHistory) {
+extension BDRealmTranslation {
+    init(realmTranslation: RealmTranslation) {
         identifier = realmTranslation.identifier
         word = realmTranslation.word
         language = realmTranslation.language
