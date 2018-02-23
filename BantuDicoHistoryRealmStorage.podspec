@@ -67,7 +67,7 @@ s.ios.deployment_target = "11.0"
 #  Supports git, hg, bzr, svn and HTTP.
 #
 
-s.source       = { :git => "https://github.com/rokridi/BantuDicoHistoryRealmStorage.git", :tag => 'Release-' + s.version }
+s.source       = { :git => "https://github.com/rokridi/BantuDicoHistoryRealmStorage.git", :tag => 'Release-' + s.version.to_s }
 
 # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 #
