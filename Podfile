@@ -8,7 +8,11 @@ target 'BantuDicoHistoryRealmStorage' do
   # Pods for BantuDicoHistoryRealmStorage
 
   pod 'RealmSwift'
-
+  
+  target 'BantuDicoStorage' do
+      pod 'RealmSwift'
+  end
+  
   target 'BantuDicoHistoryRealmStorageTests' do
     inherit! :search_paths
     # Pods for testing

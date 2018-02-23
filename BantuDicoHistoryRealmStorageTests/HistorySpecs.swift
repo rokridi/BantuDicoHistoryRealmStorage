@@ -1,5 +1,5 @@
 //
-//  SaveSpec.swift
+//  FetchSpec.swift
 //  BantuDicoHistoryRealmStorageTests
 //
 //  Created by Mohamed Aymen Landolsi on 20/02/2018.
@@ -12,7 +12,7 @@ import Nimble
 import RealmSwift
 @testable import BantuDicoHistoryRealmStorage
 
-class SaveSpecs: QuickSpec {
+class HistorySpecs: QuickSpec {
     
     override func spec() {
         
@@ -27,14 +27,12 @@ class SaveSpecs: QuickSpec {
             }
         }
         
-        describe("Save") {
+        describe("History") {
             
-            context("Save translation", {
-                it("should save translation with success", closure: {
+            context("Fetch all history", {
+                it("should return one element", closure: {
                     waitUntil(timeout: 3, action: { done in
-                        
-                        storage.saveTranslation(Translations.saveTranslation, completion: { success, error in
-                            
+                        storage.addTranslationToFavorites(Translations.fetchTranslation, completion: { success, error in
                             expect(success).to(equal(true))
                             expect(error).to(beNil())
                             
@@ -43,10 +41,11 @@ class SaveSpecs: QuickSpec {
                                 expect(translations).toNot(beNil())
                                 
                                 if let translations = translations {
+                                    
                                     expect(translations.count).to(equal(1))
                                     
                                     if let element = translations.first {
-                                        expect(element.identifier).to(match(Translations.saveTranslation.identifier))
+                                        expect(element.identifier).to(match(Translations.fetchTranslation.identifier))
                                     }
                                 }
                                 done()

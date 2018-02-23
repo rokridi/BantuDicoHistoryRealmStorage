@@ -11,19 +11,19 @@ import RealmSwift
 
 class BDRealmTranslationHistory: Object {
     
-    @objc dynamic var sourceWord = ""
-    @objc dynamic var sourceLanguage = ""
-    @objc dynamic var destinationLanguage = ""
+    @objc dynamic var word = ""
+    @objc dynamic var language = ""
+    @objc dynamic var translationLanguage = ""
     @objc dynamic var isFavorite = false
     @objc public dynamic var identifier: String = ""
     var translations = List<String>()
     
-    convenience init(sourceWord: String, sourceLanguage: String, destinationLanguage: String,
+    convenience init(word: String, language: String, translationLanguage: String,
                      isFavorite: Bool, translations: [String]) {
         self.init()
-        setCompoundSourceWord(sourceWord: sourceWord)
-        setCompoundSourceLanguage(sourceLanguage: sourceLanguage)
-        setCompoundDestinationLanguage(destinationLanguage: destinationLanguage)
+        setCompoundWord(word: word)
+        setCompoundLanguage(language: language)
+        setCompoundTranslationLanguage(translationLanguage: translationLanguage)
         self.isFavorite = isFavorite
         
         self.translations = List<String>()
@@ -37,22 +37,22 @@ class BDRealmTranslationHistory: Object {
 
 extension BDRealmTranslationHistory {
     
-    func setCompoundSourceWord(sourceWord: String) {
-        self.sourceWord = sourceWord
+    func setCompoundWord(word: String) {
+        self.word = word
         identifier = identifierValue()
     }
     
-    func setCompoundSourceLanguage(sourceLanguage: String) {
-        self.sourceLanguage = sourceLanguage
+    func setCompoundLanguage(language: String) {
+        self.language = language
         identifier = identifierValue()
     }
     
-    func setCompoundDestinationLanguage(destinationLanguage: String) {
-        self.destinationLanguage = destinationLanguage
+    func setCompoundTranslationLanguage(translationLanguage: String) {
+        self.translationLanguage = translationLanguage
         identifier = identifierValue()
     }
     
     private func identifierValue() -> String {
-        return "\(sourceWord)-\(sourceLanguage)-\(destinationLanguage)"
+        return "\(word)-\(language)-\(translationLanguage)"
     }
 }

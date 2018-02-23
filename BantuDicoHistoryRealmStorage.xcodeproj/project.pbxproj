@@ -14,8 +14,9 @@
 		1E159BFD203B2F99001B9FD6 /* BDRealmTranslationHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E159BFC203B2F99001B9FD6 /* BDRealmTranslationHistory.swift */; };
 		1E159C00203B31F5001B9FD6 /* BantuDicoHistoryRealmStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E159BFF203B31F5001B9FD6 /* BantuDicoHistoryRealmStorage.swift */; };
 		1E159C02203B3AC3001B9FD6 /* BDTranslationHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E159C01203B3AC3001B9FD6 /* BDTranslationHistory.swift */; };
-		1E159C04203C778F001B9FD6 /* FetchSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E159C03203C778F001B9FD6 /* FetchSpecs.swift */; };
+		1E159C04203C778F001B9FD6 /* HistorySpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E159C03203C778F001B9FD6 /* HistorySpecs.swift */; };
 		1E159C06203C779A001B9FD6 /* SaveSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E159C05203C779A001B9FD6 /* SaveSpecs.swift */; };
+		1EC7E80520400E610068EB6E /* Translations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC7E80420400E610068EB6E /* Translations.swift */; };
 		9CA419EFDC9410F1FD16C37B /* Pods_BantuDicoHistoryRealmStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D48457BB011AAEF140C166 /* Pods_BantuDicoHistoryRealmStorage.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,12 +41,16 @@
 		1E159BFC203B2F99001B9FD6 /* BDRealmTranslationHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDRealmTranslationHistory.swift; sourceTree = "<group>"; };
 		1E159BFF203B31F5001B9FD6 /* BantuDicoHistoryRealmStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BantuDicoHistoryRealmStorage.swift; sourceTree = "<group>"; };
 		1E159C01203B3AC3001B9FD6 /* BDTranslationHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDTranslationHistory.swift; sourceTree = "<group>"; };
-		1E159C03203C778F001B9FD6 /* FetchSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchSpecs.swift; sourceTree = "<group>"; };
+		1E159C03203C778F001B9FD6 /* HistorySpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorySpecs.swift; sourceTree = "<group>"; };
 		1E159C05203C779A001B9FD6 /* SaveSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveSpecs.swift; sourceTree = "<group>"; };
+		1EC7E80420400E610068EB6E /* Translations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translations.swift; sourceTree = "<group>"; };
 		549D02FA703F46D5882BD592 /* Pods-BantuDicoHistoryRealmStorageTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BantuDicoHistoryRealmStorageTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BantuDicoHistoryRealmStorageTests/Pods-BantuDicoHistoryRealmStorageTests.debug.xcconfig"; sourceTree = "<group>"; };
+		63D12CB1B242D70DE4D70494 /* Pods-BantuDicoHistoryRealmStorage-BantuDicoStorage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BantuDicoHistoryRealmStorage-BantuDicoStorage.release.xcconfig"; path = "Pods/Target Support Files/Pods-BantuDicoHistoryRealmStorage-BantuDicoStorage/Pods-BantuDicoHistoryRealmStorage-BantuDicoStorage.release.xcconfig"; sourceTree = "<group>"; };
 		68D48457BB011AAEF140C166 /* Pods_BantuDicoHistoryRealmStorage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BantuDicoHistoryRealmStorage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		980E9D43503F6C84790925F3 /* Pods-BantuDicoHistoryRealmStorage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BantuDicoHistoryRealmStorage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BantuDicoHistoryRealmStorage/Pods-BantuDicoHistoryRealmStorage.debug.xcconfig"; sourceTree = "<group>"; };
+		AD03D205ED98A53C4C861389 /* Pods-BantuDicoHistoryRealmStorage-BantuDicoStorage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BantuDicoHistoryRealmStorage-BantuDicoStorage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BantuDicoHistoryRealmStorage-BantuDicoStorage/Pods-BantuDicoHistoryRealmStorage-BantuDicoStorage.debug.xcconfig"; sourceTree = "<group>"; };
 		BFB64DD57AF6A2941CB7B5B3 /* Pods-BantuDicoHistoryRealmStorage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BantuDicoHistoryRealmStorage.release.xcconfig"; path = "Pods/Target Support Files/Pods-BantuDicoHistoryRealmStorage/Pods-BantuDicoHistoryRealmStorage.release.xcconfig"; sourceTree = "<group>"; };
+		DF45780B1A0F59A51A88DEBB /* Pods_BantuDicoHistoryRealmStorage_BantuDicoStorage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BantuDicoHistoryRealmStorage_BantuDicoStorage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF50FE18AD8D10B20847B296 /* Pods-BantuDicoHistoryRealmStorageTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BantuDicoHistoryRealmStorageTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BantuDicoHistoryRealmStorageTests/Pods-BantuDicoHistoryRealmStorageTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -104,8 +109,9 @@
 		1E159BEE203B15BC001B9FD6 /* BantuDicoHistoryRealmStorageTests */ = {
 			isa = PBXGroup;
 			children = (
+				1EC7E80420400E610068EB6E /* Translations.swift */,
 				1E159BEF203B15BC001B9FD6 /* FavoriteSpecs.swift */,
-				1E159C03203C778F001B9FD6 /* FetchSpecs.swift */,
+				1E159C03203C778F001B9FD6 /* HistorySpecs.swift */,
 				1E159C05203C779A001B9FD6 /* SaveSpecs.swift */,
 				1E159BF1203B15BC001B9FD6 /* Info.plist */,
 			);
@@ -134,6 +140,7 @@
 			children = (
 				68D48457BB011AAEF140C166 /* Pods_BantuDicoHistoryRealmStorage.framework */,
 				13BBEB9E9635966E38891045 /* Pods_BantuDicoHistoryRealmStorageTests.framework */,
+				DF45780B1A0F59A51A88DEBB /* Pods_BantuDicoHistoryRealmStorage_BantuDicoStorage.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -145,6 +152,8 @@
 				BFB64DD57AF6A2941CB7B5B3 /* Pods-BantuDicoHistoryRealmStorage.release.xcconfig */,
 				549D02FA703F46D5882BD592 /* Pods-BantuDicoHistoryRealmStorageTests.debug.xcconfig */,
 				FF50FE18AD8D10B20847B296 /* Pods-BantuDicoHistoryRealmStorageTests.release.xcconfig */,
+				AD03D205ED98A53C4C861389 /* Pods-BantuDicoHistoryRealmStorage-BantuDicoStorage.debug.xcconfig */,
+				63D12CB1B242D70DE4D70494 /* Pods-BantuDicoHistoryRealmStorage-BantuDicoStorage.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -231,6 +240,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 1E159BD7203B15BC001B9FD6;
 			productRefGroup = 1E159BE2203B15BC001B9FD6 /* Products */;
@@ -370,7 +380,8 @@
 			files = (
 				1E159BF0203B15BC001B9FD6 /* FavoriteSpecs.swift in Sources */,
 				1E159C06203C779A001B9FD6 /* SaveSpecs.swift in Sources */,
-				1E159C04203C778F001B9FD6 /* FetchSpecs.swift in Sources */,
+				1E159C04203C778F001B9FD6 /* HistorySpecs.swift in Sources */,
+				1EC7E80520400E610068EB6E /* Translations.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,7 +445,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -488,7 +499,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
