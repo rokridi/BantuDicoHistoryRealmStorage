@@ -10,12 +10,12 @@ import Foundation
 
 public struct BDRealmTranslation {
     
-    let identifier: String
-    let word: String
-    let language: String
-    let translationLanguage: String
-    let isFavorite: Bool
-    let translations: [String]
+    public let identifier: String
+    public let word: String
+    public let language: String
+    public let translationLanguage: String
+    public let isFavorite: Bool
+    public let translations: [String]
 }
 
 extension BDRealmTranslation {
