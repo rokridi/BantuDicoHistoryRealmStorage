@@ -18,7 +18,6 @@ class FavoriteSpecs: QuickSpec {
         
         let storage = BantuDicoHistoryRealmStorage(storeName: self.name, storeType: .inMemory)
         
-        
         afterEach {
             var config = Realm.Configuration()
             config.inMemoryIdentifier = self.name
