@@ -32,25 +32,10 @@ class SaveSpecs: QuickSpec {
             context("Save translation", {
                 it("should save translation with success", closure: {
                     waitUntil(timeout: 3, action: { done in
-                        
                         storage.saveTranslation(Translations.saveTranslation, completion: { success, error in
-                            
                             expect(success).to(equal(true))
                             expect(error).to(beNil())
-                            
-                            storage.fetchAllTranslations(completion: { translations, error in
-                                expect(error).to(beNil())
-                                expect(translations).toNot(beNil())
-                                
-                                if let translations = translations {
-                                    expect(translations.count).to(equal(1))
-                                    
-                                    if let element = translations.first {
-                                        expect(element.identifier).to(match(Translations.saveTranslation.identifier))
-                                    }
-                                }
-                                done()
-                            })
+                            done()
                         })
                     })
                 })
