@@ -14,9 +14,6 @@ public typealias BDFetchAllTranslationsCompletionHandler = ([BDRealmTranslation]
 public typealias BDSaveTranslationCompletionHandler = (Bool, Error?) -> Void
 public typealias BDAddTranslationToFavoritesCompletionHandler = (Bool, Error?) -> Void
 public typealias BDRemoveTranslationFromFavoritesCompletionHandler = (Bool, Error?) -> Void
-public typealias BDFetchFavoritesCompletionHandler = ([BDRealmTranslation]?) -> Void
-private typealias BDFetchRealmTranslationCompletionHandler = ([ThreadSafeReference<RealmTranslation>]) -> Void
-private typealias BDCreateOrUpdateCompletionHandler = (Bool, Error?) -> Void
 
 public class BantuDicoHistoryRealmStorage {
     
@@ -54,7 +51,7 @@ public extension BantuDicoHistoryRealmStorage {
     ///   - translationLanguage: the language to which the word will be translated.
     ///   - queue: the queue on which the completion will be called.
     ///   - completion: closure called when task is finished.
-    func fetchTranslation(word: String, language: String,translationLanguage: String,
+    public func fetchTranslation(word: String, language: String,translationLanguage: String,
                           queue: DispatchQueue = DispatchQueue.main, completion: @escaping BDFetchTranslationCompletionHandler) {
         
         let predicate = NSPredicate(format: "word == %@ AND language == %@ AND translationLanguage == %@", word, language, translationLanguage)
@@ -74,7 +71,7 @@ public extension BantuDicoHistoryRealmStorage {
     /// - Parameters:
     ///   - queue: the queue on which the completion will be called.
     ///   - completion: closure called when task is finished.
-    func fetchAllTranslations(queue: DispatchQueue = DispatchQueue.main, completion: @escaping BDFetchAllTranslationsCompletionHandler) {
+    public func fetchAllTranslations(queue: DispatchQueue = DispatchQueue.main, completion: @escaping BDFetchAllTranslationsCompletionHandler) {
         operationQueue.addOperation {
             let realm = try! Realm()
             let result = Array(realm.objects(RealmTranslation.self)).map({ BDRealmTranslation(realmTranslation: $0) })
@@ -93,7 +90,7 @@ public extension BantuDicoHistoryRealmStorage {
     ///   - queue: the queue on which the completion will be called.
     ///   - translations: the translations of the word.
     ///   - completion: closure called when task is finished.
-    func saveTranslation(word: String,
+    public func saveTranslation(word: String,
                          language: String,
                          translationLanguage: String,
                          translations: [String],
@@ -112,7 +109,7 @@ public extension BantuDicoHistoryRealmStorage {
     /// - Parameters:
     ///   - translation: translation to save or update.
     ///   - completion: closure called when task is finished.
-    func saveTranslation(_ translation: BDRealmTranslation,
+    public func saveTranslation(_ translation: BDRealmTranslation,
                          queue: DispatchQueue = DispatchQueue.main,
                          completion: @escaping BDSaveTranslationCompletionHandler) {
         self.saveTranslation(word: translation.word, language: translation.language, translationLanguage: translation.translationLanguage, translations: translation.translations, queue: queue, completion: completion)
@@ -130,7 +127,7 @@ public extension BantuDicoHistoryRealmStorage {
     ///   - isFavorite: if true then translation will be added to favories. If false then translation will be removed from favorites.
     ///   - queue: the queue on which the completion will be called.
     ///   - completion: closure called when task is finished.
-    func addTranslationToFavorites(_ translation: BDRealmTranslation,
+    public func addTranslationToFavorites(_ translation: BDRealmTranslation,
                                    queue: DispatchQueue = DispatchQueue.main,
                                    completion: @escaping BDAddTranslationToFavoritesCompletionHandler) {
         addTranslationToFavorites(word: translation.word, language: translation.language, translationLanguage: translation.translationLanguage, translations: translation.translations, queue: queue, completion: completion)
@@ -145,7 +142,7 @@ public extension BantuDicoHistoryRealmStorage {
     ///   - queue: the queue on which the completion will be called.
     ///   - translations: the translations of the word.
     ///   - completion: closure called when task is finished.
-    func addTranslationToFavorites(word: String, language: String,
+    public func addTranslationToFavorites(word: String, language: String,
                                    translationLanguage: String, translations: [String],
                                    queue: DispatchQueue = DispatchQueue.main,
                                    completion: @escaping BDAddTranslationToFavoritesCompletionHandler) {
@@ -162,7 +159,7 @@ public extension BantuDicoHistoryRealmStorage {
     ///   - translation: translation to remove from favorites.
     ///   - queue: the queue on which the completion will be called.
     ///   - completion: closure called when task is finished.
-    func removeTranslationFromFavorites(_ translation: BDRealmTranslation,
+    public func removeTranslationFromFavorites(_ translation: BDRealmTranslation,
                                         queue: DispatchQueue = DispatchQueue.main,
                                         completion: @escaping BDRemoveTranslationFromFavoritesCompletionHandler) {
         let predicate = NSPredicate(format: "word == %@ AND language == %@ AND translationLanguage == %@ AND isFavorite == true", translation.word, translation.language, translation.translationLanguage)
@@ -197,7 +194,12 @@ public extension BantuDicoHistoryRealmStorage {
 
 //MARK: - Data base access
 
+
+
 private extension BantuDicoHistoryRealmStorage {
+    
+    private typealias BDFetchRealmTranslationCompletionHandler = ([ThreadSafeReference<RealmTranslation>]) -> Void
+    private typealias BDCreateOrUpdateCompletionHandler = (Bool, Error?) -> Void
     
     /// Fetches BDRealmTranslationResult object from data base.
     ///
@@ -206,7 +208,7 @@ private extension BantuDicoHistoryRealmStorage {
     ///   - language: the language of word.
     ///   - translationLanguage: the language to which the word is translated.
     ///   - completion: closure called when task is finished.
-    func fetchRealmTranslations(predicate: NSPredicate, completion: @escaping BDFetchRealmTranslationCompletionHandler) {
+    private func fetchRealmTranslations(predicate: NSPredicate, completion: @escaping BDFetchRealmTranslationCompletionHandler) {
         operationQueue.addOperation {
             let realm = try! Realm()
             let result = realm.objects(RealmTranslation.self).filter(predicate)
@@ -222,7 +224,7 @@ private extension BantuDicoHistoryRealmStorage {
     ///   - translationLanguage: the language to which the word is translated.
     ///   - translations: the translations of word.
     ///   - completion: closure called when task is finished.
-    func createOrUpdateTranslationHistory(word: String, language: String,
+    private func createOrUpdateTranslationHistory(word: String, language: String,
                                           translationLanguage: String, isFavorite: Bool,
                                           translations: [String],
                                           completion: @escaping BDCreateOrUpdateCompletionHandler) {
