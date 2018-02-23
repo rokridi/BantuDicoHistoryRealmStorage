@@ -24,7 +24,7 @@ s.summary      = "A utility for saving and fetching Bantu Dico translations resu
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
-s.description  = "A utility for saving and fetching Bantu Dico translations results."
+s.description  = "This pod is used for managing translations that are fetched via BAntu Dico API."
 
 
 s.homepage     = "https://github.com/rokridi/BantuDicoHistoryRealmStorage"
@@ -67,7 +67,7 @@ s.ios.deployment_target = "11.0"
 #  Supports git, hg, bzr, svn and HTTP.
 #
 
-s.source       = { :git => "https://github.com/rokridi/BantuDicoHistoryRealmStorage.git", :tag => 'Release-' + s.version }
+s.source       = { :git => "https://github.com/rokridi/BantuDicoHistoryRealmStorage.git", :tag => s.version }
 
 # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 #
@@ -78,7 +78,6 @@ s.source       = { :git => "https://github.com/rokridi/BantuDicoHistoryRealmStor
 #
 
 s.source_files  = "BantuDicoHistoryRealmStorage/**/*.swift"
-
 
 # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 #
