@@ -15,27 +15,58 @@ import RealmSwift
 class SaveSpecs: QuickSpec {
     
     override func spec() {
-        
-        let storage = BantuDicoHistoryRealmStorage(storeName: self.name, storeType: .inMemory)
-        
-        afterEach {
-            var config = Realm.Configuration()
-            config.inMemoryIdentifier = self.name
-            let testRealm = try! Realm(configuration: config)
-            try! testRealm.write {
-                testRealm.deleteAll()
-            }
-        }
-        
+    
+        AsyncDefaults.Timeout = 10
+        AsyncDefaults.PollInterval = 0.1
+                
         describe("Save") {
+            
+            var storage: BantuDicoHistoryRealmStorage!
+            var testRealm: Realm!
+            
+            beforeEach {
+                storage = BantuDicoHistoryRealmStorage(storeName: self.name, storeType: .inMemory)
+                testRealm = try! Realm(configuration: Realm.Configuration(inMemoryIdentifier: self.name))
+            }
+            
+            afterEach {
+                do {
+                    try testRealm.write {
+                        testRealm.deleteAll()
+                    }
+                } catch let error {
+                    print(error)
+                }
+            }
             
             context("Save translation", {
                 it("should save translation with success", closure: {
-                    waitUntil(timeout: 3, action: { done in
+                    /*
+                    waitUntil(timeout: 10, action: { done in
                         storage.saveTranslation(Translations.saveTranslation, completion: { success, error in
-                            expect(success).to(equal(true))
+                            expect(success).to(beTrue())
                             expect(error).to(beNil())
-                            done()
+                            
+                            storage.fetchTranslation(word: Translations.saveTranslation.word, language: Translations.saveTranslation.language, translationLanguage: Translations.saveTranslation.translationLanguage, completion: { translation, error in
+
+                                expect(translation).toNot(beNil())
+                                expect(error).to(beNil())
+                                
+                                done()
+                            })
+                        })
+                    })
+ */
+                    
+                    storage.saveTranslation(Translations.saveTranslation, completion: { success, error in
+                        expect(success).toEventually(beTrue())
+                        expect(error).toEventually(beNil())
+                        
+                        storage.fetchTranslation(word: Translations.saveTranslation.word, language: Translations.saveTranslation.language, translationLanguage: Translations.saveTranslation.translationLanguage, completion: { translation, error in
+                            
+                            expect(translation).toEventuallyNot(beNil())
+                            expect(error).toEventually(beNil())
+                            expect(translation?.word).toEventually(equal(Translations.saveTranslation.word))
                         })
                     })
                 })
