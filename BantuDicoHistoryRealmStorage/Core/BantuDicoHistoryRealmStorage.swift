@@ -16,8 +16,13 @@ public typealias BDDeleteTranslationsCompletionHandler = (Bool, Error?) -> Void
 public typealias BDAddTranslationToFavoritesCompletionHandler = (Bool, Error?) -> Void
 public typealias BDRemoveTranslationFromFavoritesCompletionHandler = (Bool, Error?) -> Void
 
+/// Handles translations persisted Realm in data base.
 public class BantuDicoHistoryRealmStorage {
     
+    /// Type of the store.
+    ///
+    /// - inMemory: Translations will be persisted only during application lifetime.
+    /// - persistent: Tanslations will be persisted between application laaunches.
     public enum StoreType {
         case inMemory
         case persistent
@@ -25,6 +30,11 @@ public class BantuDicoHistoryRealmStorage {
     
     private let operationQueue: OperationQueue
     
+    /// Creates an instance of BantuDicoHistoryRealmStorage.
+    ///
+    /// - Parameters:
+    ///   - storeName: name of the data base.
+    ///   - storeType: type of the store (in memory or persistent).
     public init(storeName: String, storeType: StoreType = .persistent) {
         
         var config = Realm.Configuration()

@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>BantuDicoHistoryRealmStorage Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/BantuDicoHistoryRealmStorage" class="dashAnchor"></a>
+    <a title="BantuDicoHistoryRealmStorage Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">BantuDicoHistoryRealmStorage Docs</a> (91% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">BantuDicoHistoryRealmStorage Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        BantuDicoHistoryRealmStorage Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/BantuDicoHistoryRealmStorage.html">BantuDicoHistoryRealmStorage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BantuDicoHistoryRealmStorage/StoreType.html">– StoreType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/BDRealmTranslation.html">BDRealmTranslation</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>BantuDicoHistoryRealmStorage</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">BantuDicoHistoryRealmStorage</span></code></pre>
+
+                </div>
+              </div>
+            <p>Handles translations persisted Realm in data base.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:28BantuDicoHistoryRealmStorageAAC9StoreTypeO"></a>
+                    <a name="//apple_ref/swift/Enum/StoreType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:28BantuDicoHistoryRealmStorageAAC9StoreTypeO">StoreType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Type of the store.</p>
+
+<ul>
+<li>inMemory: Translations will be persisted only during application lifetime.</li>
+<li>persistent: Tanslations will be persisted between application laaunches.</li>
+</ul>
+
+                        <a href="../Classes/BantuDicoHistoryRealmStorage/StoreType.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">StoreType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:28BantuDicoHistoryRealmStorageAACABSS9storeName_AB9StoreTypeO0fI0tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(storeName:storeType:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:28BantuDicoHistoryRealmStorageAACABSS9storeName_AB9StoreTypeO0fI0tcfc">init(storeName:storeType:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates an instance of BantuDicoHistoryRealmStorage.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">storeName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">storeType</span><span class="p">:</span> <span class="kt"><a href="../Classes/BantuDicoHistoryRealmStorage/StoreType.html">StoreType</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">persistent</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>storeName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>name of the data base.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>storeType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>type of the store (in memory or persistent).</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:28BantuDicoHistoryRealmStorageAAC16fetchTranslationySS4word_SS8languageSS19translationLanguageSo13DispatchQueueC5queueyAA07BDRealmG0VSg_s5Error_pSgtc10completiontF"></a>
+                    <a name="//apple_ref/swift/Method/fetchTranslation(word:language:translationLanguage:queue:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:28BantuDicoHistoryRealmStorageAAC16fetchTranslationySS4word_SS8languageSS19translationLanguageSo13DispatchQueueC5queueyAA07BDRealmG0VSg_s5Error_pSgtc10completiontF">fetchTranslation(word:language:translationLanguage:queue:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Fetch a translation result from the data base.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">fetchTranslation</span><span class="p">(</span><span class="nv">word</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span><span class="nv">translationLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+                      <span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">BDFetchTranslationCompletionHandler</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>word</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the word to translate.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>language</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the language of the word.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>translationLanguage</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the language to which the word will be translated.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the queue on which the completion will be called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>closure called when task is finished.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:28BantuDicoHistoryRealmStorageAAC29fetchTanslationsBeginningWithySS_SS8languageSS19translationLanguageSo13DispatchQueueC5queueySayAA18BDRealmTranslationVGSg_s5Error_pSgtc10completiontF"></a>
+                    <a name="//apple_ref/swift/Method/fetchTanslationsBeginningWith(_:language:translationLanguage:queue:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:28BantuDicoHistoryRealmStorageAAC29fetchTanslationsBeginningWithySS_SS8languageSS19translationLanguageSo13DispatchQueueC5queueySayAA18BDRealmTranslationVGSg_s5Error_pSgtc10completiontF">fetchTanslationsBeginningWith(_:language:translationLanguage:queue:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Fetche translations which word property begins with <code>beginning</code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">fetchTanslationsBeginningWith</span><span class="p">(</span><span class="n">_</span> <span class="nv">beginning</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">translationLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">BDFetchTranslationsCompletionHandler</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>beginning</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the string that translation&rsquo;s word begins with.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>language</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>language of the translated word.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>translationLanguage</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>language of the translation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the queue on which the completion will be called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>closure called when task is finished.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:28BantuDicoHistoryRealmStorageAAC20fetchAllTranslationsySo13DispatchQueueC5queue_ySayAA18BDRealmTranslationVGSg_s5Error_pSgtc10completiontF"></a>
+                    <a name="//apple_ref/swift/Method/fetchAllTranslations(queue:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:28BantuDicoHistoryRealmStorageAAC20fetchAllTranslationsySo13DispatchQueueC5queue_ySayAA18BDRealmTranslationVGSg_s5Error_pSgtc10completiontF">fetchAllTranslations(queue:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Fetches all history.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">fetchAllTranslations</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">BDFetchTranslationsCompletionHandler</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the queue on which the completion will be called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>closure called when task is finished.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:28BantuDicoHistoryRealmStorageAAC15saveTranslationySS4word_SS8languageSS19translationLanguageSaySSG12translationsSo13DispatchQueueC5queueySb_s5Error_pSgtc10completiontF"></a>
+                    <a name="//apple_ref/swift/Method/saveTranslation(word:language:translationLanguage:translations:queue:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:28BantuDicoHistoryRealmStorageAAC15saveTranslationySS4word_SS8languageSS19translationLanguageSaySSG12translationsSo13DispatchQueueC5queueySb_s5Error_pSgtc10completiontF">saveTranslation(word:language:translationLanguage:translations:queue:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Saves a translation history or updates it if it already exists.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">saveTranslation</span><span class="p">(</span><span class="nv">word</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+                            <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+                            <span class="nv">translationLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+                            <span class="nv">translations</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">],</span>
+                            <span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="p">,</span>
+                            <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">BDSaveTranslationCompletionHandler</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>word</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the word to translate.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>language</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the language of the word.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>translationLanguage</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the language to which the word will be translated.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the queue on which the completion will be called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>translations</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the translations of the word.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>closure called when task is finished.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:28BantuDicoHistoryRealmStorageAAC15saveTranslationyAA07BDRealmG0V_So13DispatchQueueC5queueySb_s5Error_pSgtc10completiontF"></a>
+                    <a name="//apple_ref/swift/Method/saveTranslation(_:queue:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:28BantuDicoHistoryRealmStorageAAC15saveTranslationyAA07BDRealmG0V_So13DispatchQueueC5queueySb_s5Error_pSgtc10completiontF">saveTranslation(_:queue:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Saves a translation or updates it if it already exists.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">saveTranslation</span><span class="p">(</span><span class="n">_</span> <span class="nv">translation</span><span class="p">:</span> <span class="kt"><a href="../Structs/BDRealmTranslation.html">BDRealmTranslation</a></span><span class="p">,</span>
+                            <span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="p">,</span>
+                            <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">BDSaveTranslationCompletionHandler</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>translation</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>translation to save or update.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>closure called when task is finished.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:28BantuDicoHistoryRealmStorageAAC25addTranslationToFavoritesyAA07BDRealmG0V_So13DispatchQueueC5queueySb_s5Error_pSgtc10completiontF"></a>
+                    <a name="//apple_ref/swift/Method/addTranslationToFavorites(_:queue:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:28BantuDicoHistoryRealmStorageAAC25addTranslationToFavoritesyAA07BDRealmG0V_So13DispatchQueueC5queueySb_s5Error_pSgtc10completiontF">addTranslationToFavorites(_:queue:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Add translation to favorites and saves it to history.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addTranslationToFavorites</span><span class="p">(</span><span class="n">_</span> <span class="nv">translation</span><span class="p">:</span> <span class="kt"><a href="../Structs/BDRealmTranslation.html">BDRealmTranslation</a></span><span class="p">,</span>
+                               <span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="p">,</span>
+                               <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">BDAddTranslationToFavoritesCompletionHandler</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>translation</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>translation to add or remove from favorites.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>isFavorite</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>if true then translation will be added to favories. If false then translation will be removed from favorites.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the queue on which the completion will be called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>closure called when task is finished.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:28BantuDicoHistoryRealmStorageAAC25addTranslationToFavoritesySS4word_SS8languageSS19translationLanguageSaySSG12translationsSo13DispatchQueueC5queueySb_s5Error_pSgtc10completiontF"></a>
+                    <a name="//apple_ref/swift/Method/addTranslationToFavorites(word:language:translationLanguage:translations:queue:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:28BantuDicoHistoryRealmStorageAAC25addTranslationToFavoritesySS4word_SS8languageSS19translationLanguageSaySSG12translationsSo13DispatchQueueC5queueySb_s5Error_pSgtc10completiontF">addTranslationToFavorites(word:language:translationLanguage:translations:queue:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Add translation from favorites and saves it to history.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addTranslationToFavorites</span><span class="p">(</span><span class="nv">word</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+                               <span class="nv">translationLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">translations</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">],</span>
+                               <span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="p">,</span>
+                               <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">BDAddTranslationToFavoritesCompletionHandler</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>word</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the word to translate.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>language</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the language of the word.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>translationLanguage</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the language to which the word is translated.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the queue on which the completion will be called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>translations</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the translations of the word.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>closure called when task is finished.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:28BantuDicoHistoryRealmStorageAAC30removeTranslationFromFavoritesyAA07BDRealmG0V_So13DispatchQueueC5queueySb_s5Error_pSgtc10completiontF"></a>
+                    <a name="//apple_ref/swift/Method/removeTranslationFromFavorites(_:queue:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:28BantuDicoHistoryRealmStorageAAC30removeTranslationFromFavoritesyAA07BDRealmG0V_So13DispatchQueueC5queueySb_s5Error_pSgtc10completiontF">removeTranslationFromFavorites(_:queue:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Remove a translation from favorites. If a translation is not favorite or does not exist then operation will finish with success.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">removeTranslationFromFavorites</span><span class="p">(</span><span class="n">_</span> <span class="nv">translation</span><span class="p">:</span> <span class="kt"><a href="../Structs/BDRealmTranslation.html">BDRealmTranslation</a></span><span class="p">,</span>
+                                    <span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="p">,</span>
+                                    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">BDRemoveTranslationFromFavoritesCompletionHandler</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>translation</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>translation to remove from favorites.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the queue on which the completion will be called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>closure called when task is finished.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="https://github.com/rokridi/BantuDicoHistoryRealmStorage" target="_blank" rel="external">Mohamed Aymen Landolsi</a>. All rights reserved. (Last updated: 2018-02-27)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

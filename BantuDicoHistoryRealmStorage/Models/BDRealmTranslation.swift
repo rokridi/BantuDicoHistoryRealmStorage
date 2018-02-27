@@ -8,13 +8,25 @@
 
 import Foundation
 
+/// Represents a translation saved in data base.
 public struct BDRealmTranslation {
     
+    /// Identifier of the translation. Its format is: word-language-translationLanguage
     public let identifier: String
+    
+    /// The translated word.
     public let word: String
+    
+    /// Language of the word.
     public let language: String
+    
+    /// Language of the translation.
     public let translationLanguage: String
+    
+    /// The translation is favorite or not.
     public let isFavorite: Bool
+    
+    /// Translations of word.
     public let translations: [String]
 }
 
