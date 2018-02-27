@@ -12,7 +12,7 @@ import Foundation
 public struct BDRealmTranslation {
     
     /// Identifier of the translation. Its format is: word-language-translationLanguage
-    public let identifier: String
+    public var identifier: String
     
     /// The translated word.
     public let word: String
@@ -28,6 +28,24 @@ public struct BDRealmTranslation {
     
     /// Translations of word.
     public let translations: [String]
+    
+    /// Create an instance of BDRealmTranslation.
+    ///
+    /// - Parameters:
+    ///   - word: translated word.
+    ///   - language: language of word.
+    ///   - translationLanguage: translation language.
+    ///   - isFavorite: translation is favorite or not.
+    ///   - translations: translations of word.
+    public init(word: String, language: String, translationLanguage: String, isFavorite: Bool, translations: [String]) {
+        
+        identifier = "\(word)-\(language)-\(translationLanguage)"
+        self.word = word
+        self.language = language
+        self.translationLanguage = translationLanguage
+        self.isFavorite = isFavorite
+        self.translations = translations
+    }
 }
 
 extension BDRealmTranslation {
