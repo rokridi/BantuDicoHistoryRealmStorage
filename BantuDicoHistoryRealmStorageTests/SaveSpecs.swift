@@ -57,7 +57,6 @@ class SaveSpecs: QuickSpec {
                         })
                     })
  */
-                    
                     storage.saveTranslation(Translations.saveTranslation, completion: { success, error in
                         expect(success).toEventually(beTrue())
                         expect(error).toEventually(beNil())
