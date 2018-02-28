@@ -28,7 +28,7 @@ public class BantuDicoHistoryRealmStorage {
         case persistent
     }
     
-    private let operationQueue: OperationQueue
+    private let dispatchQueue = DispatchQueue(label: "com.BDRealmStorage.queue")
     
     /// Creates an instance of BantuDicoHistoryRealmStorage.
     ///
@@ -44,9 +44,6 @@ public class BantuDicoHistoryRealmStorage {
             config.fileURL = config.fileURL!.deletingLastPathComponent().appendingPathComponent("\(storeName).realm")
         }
         Realm.Configuration.defaultConfiguration = config
-        
-        operationQueue = OperationQueue()
-        operationQueue.maxConcurrentOperationCount = 1
     }
 }
 
@@ -62,22 +59,39 @@ public extension BantuDicoHistoryRealmStorage {
     ///   - translationLanguage: the language to which the word will be translated.
     ///   - queue: the queue on which the completion will be called.
     ///   - completion: closure called when task is finished.
-    public func fetchTranslation(word: String, language: String,translationLanguage: String,
-                          queue: DispatchQueue = DispatchQueue.main, completion: @escaping BDFetchTranslationCompletionHandler) {
+    public func translation(word: String, language: String, translationLanguage: String,
+                            queue: DispatchQueue = DispatchQueue.main, completion: @escaping BDFetchTranslationCompletionHandler) throws {
         
-        let predicate = NSPredicate(format: "word == %@ AND language == %@ AND translationLanguage == %@", word, language, translationLanguage)
-        fetchRealmTranslations(predicate: predicate, completion: { realmTranslationRefs in
+        guard word.isValidWord() else {
+            throw BDRealmStorageError.invalidWord(word)
+        }
+        
+        guard language.isValidLanguage() else {
+            throw BDRealmStorageError.invalidLanguage(language)
+        }
+        
+        guard language.isValidLanguage() else {
+            throw BDRealmStorageError.invalidLanguage(translationLanguage)
+        }
+        
+        guard word.isValidWord() else {
+            throw BDRealmStorageError.invalidWord(word)
+        }
+        
+        dispatchQueue.async {
             
             let realm = try! Realm()
-            guard let realmTranslationRef = realmTranslationRefs.first, let realmTranslation = realm.resolve(realmTranslationRef) else {
+            let predicate = NSPredicate(format: "word == %@ AND language == %@ AND translationLanguage == %@", word, language, translationLanguage)
+            guard let realmTranslation = self.realmTranslation(predicate: predicate, realm: realm) else {
                 queue.async { completion(nil, nil) }
                 return
             }
-            queue.async { completion(BDRealmTranslation(realmTranslation: realmTranslation), nil) }
-        })
+            
+            queue.async { completion(try! BDRealmTranslation(realmTranslation: realmTranslation), nil) }
+        }
     }
     
-    /// Fetche translations which word property begins with `beginning`
+    /// Fetche translations which word property begins with `beginning`. Translations will be sorted by 'word' ascending.
     ///
     /// - Parameters:
     ///   - beginning: the string that translation's word begins with.
@@ -85,40 +99,55 @@ public extension BantuDicoHistoryRealmStorage {
     ///   - translationLanguage: language of the translation.
     ///   - queue: the queue on which the completion will be called.
     ///   - completion: closure called when task is finished.
-    public func fetchTanslationsBeginningWith(_ beginning: String, language: String, translationLanguage: String, queue: DispatchQueue = DispatchQueue.main, completion: @escaping BDFetchTranslationsCompletionHandler) {
-        
-        let predicate = NSPredicate(format: "word BEGINSWITH[c] %@ AND language == %@ AND translationLanguage == %@", beginning, language, translationLanguage)
-        fetchRealmTranslations(predicate: predicate, completion: { realmTranslationRefs in
+    public func tanslationsBeginningWith(_ beginning: String, language: String, translationLanguage: String, queue: DispatchQueue = DispatchQueue.main, completion: @escaping BDFetchTranslationsCompletionHandler) {
+        dispatchQueue.async {
             
             let realm = try! Realm()
-            guard realmTranslationRefs.count > 0 else {
+            let predicate = NSPredicate(format: "word BEGINSWITH[c] %@ AND language == %@ AND translationLanguage == %@", beginning, language, translationLanguage)
+            
+            guard let realmTranslations = self.realmTranslations(predicate: predicate, realm: realm) else {
                 queue.async { completion(nil, nil) }
                 return
             }
             
-            let result = realmTranslationRefs.map({ realmRef -> BDRealmTranslation? in
-                
-                guard let realmRef = realm.resolve(realmRef) else {
-                    return nil
-                }
-                return BDRealmTranslation(realmTranslation: realmRef)
-                
-            }).flatMap({ $0 }).sorted(by: { $0.word <= $1.word })
+            let result = realmTranslations.map({ try! BDRealmTranslation(realmTranslation: $0) }).sorted(by: { $0.word <= $1.word })
             
             queue.async { completion(result, nil) }
-        })
+        }
     }
     
-    /// Fetches all history.
+    /// Fetch all translations including favorites.
     ///
     /// - Parameters:
     ///   - queue: the queue on which the completion will be called.
     ///   - completion: closure called when task is finished.
-    public func fetchAllTranslations(queue: DispatchQueue = DispatchQueue.main, completion: @escaping BDFetchTranslationsCompletionHandler) {
-        operationQueue.addOperation {
+    public func allTranslations(queue: DispatchQueue = DispatchQueue.main, completion: @escaping BDFetchTranslationsCompletionHandler) {
+        dispatchQueue.async {
             let realm = try! Realm()
-            let result = Array(realm.objects(RealmTranslation.self)).map({ BDRealmTranslation(realmTranslation: $0) })
+            let result = Array(realm.objects(RealmTranslation.self)).map({ try! BDRealmTranslation(realmTranslation: $0) })
             queue.async { completion(result, nil) }
+        }
+    }
+    
+    /// Fetches all favorites.
+    ///
+    /// - Parameters:
+    ///   - queue: the queue on which the completion will be called.
+    ///   - completion: closure called when task is finished.
+    public func allFavorites(queue: DispatchQueue = DispatchQueue.main, completion: @escaping BDFetchTranslationsCompletionHandler) {
+        dispatchQueue.async {
+            
+            let realm = try! Realm()
+            let predicate = NSPredicate(format: "isFavorite == true")
+            
+            guard let realmTranslations = self.realmTranslations(predicate: predicate, realm: realm) else {
+                queue.async { completion(nil, nil) }
+                return
+            }
+            
+            let favorites = realmTranslations.map({ try! BDRealmTranslation(realmTranslation: $0) }).sorted(by: { $0.word <= $1.word })
+            
+            queue.async { completion(favorites, nil) }
         }
     }
 }
@@ -127,27 +156,7 @@ public extension BantuDicoHistoryRealmStorage {
 
 extension BantuDicoHistoryRealmStorage {
     
-    /// Saves a translation history or updates it if it already exists.
-    ///
-    /// - Parameters:
-    ///   - word: the word to translate.
-    ///   - language: the language of the word.
-    ///   - translationLanguage: the language to which the word will be translated.
-    ///   - queue: the queue on which the completion will be called.
-    ///   - translations: the translations of the word.
-    ///   - completion: closure called when task is finished.
-    public func saveTranslation(word: String,
-                                language: String,
-                                translationLanguage: String,
-                                translations: [String],
-                                queue: DispatchQueue = DispatchQueue.main,
-                                completion: @escaping BDSaveTranslationCompletionHandler) {
-        createOrUpdateTranslationHistory(word: word, language: language, translationLanguage: translationLanguage, isFavorite: false, translations: translations, completion: { (success, error) in
-            queue.async { completion(success, error) }
-        })
-    }
-    
-    /// Saves a translation or updates it if it already exists.
+    /// Saves a translation or updates it if already exists.
     ///
     /// - Parameters:
     ///   - translation: translation to save or update.
@@ -155,7 +164,9 @@ extension BantuDicoHistoryRealmStorage {
     public func saveTranslation(_ translation: BDRealmTranslation,
                                 queue: DispatchQueue = DispatchQueue.main,
                                 completion: @escaping BDSaveTranslationCompletionHandler) {
-        saveTranslation(word: translation.word, language: translation.language, translationLanguage: translation.translationLanguage, translations: translation.translations, queue: queue, completion: completion)  
+        createOrUpdateTranslation(translation) { success, error in
+            queue.async { completion(success, error) }
+        }
     }
 }
 
@@ -171,33 +182,29 @@ extension BantuDicoHistoryRealmStorage {
     ///   - completion: losure called when task is finished.
     func deleteTranslations(_ translations: [BDRealmTranslation], queue: DispatchQueue = DispatchQueue.main, completion: @escaping BDDeleteTranslationsCompletionHandler) {
         
-        operationQueue.addOperation { [weak self] in
+        dispatchQueue.async { [weak self] in
             
             let identifiers = translations.map({ $0.identifier })
             let predicate = NSPredicate(format: "identifier IN %@", identifiers)
             
-            //fetch the references of realm objects to delete.
-            self?.fetchRealmTranslations(predicate: predicate, completion: { realmTranslationRefs in
-                
-                let realm = try! Realm()
-                
-                //transform the real references to realm translations.
-                let realmTranslations = realmTranslationRefs.map({ realm.resolve($0) }).flatMap({ $0 })
-                
-                guard translations.count > 0 else {
+            let realm = try! Realm()
+            
+            guard let realmTranslations = self?.realmTranslations(predicate: predicate, realm: realm), realmTranslations.count > 0 else {
+                queue.async { completion(true, nil) }
+                return
+            }
+            
+            do {
+                try realm.write {
+                    
+                    let translationsToDelete = List<RealmTranslation>()
+                    translationsToDelete.append(objectsIn: realmTranslations)
+                    realm.delete(translationsToDelete)
                     queue.async { completion(true, nil) }
-                    return
                 }
-                
-                do {
-                    try realm.write {
-                        realm.delete(realmTranslations)
-                        queue.async { completion(true, nil) }
-                    }
-                } catch let error {
-                    completion(false, error)
-                }
-            })
+            } catch let error {
+                completion(false, error)
+            }
         }
     }
     
@@ -208,86 +215,11 @@ extension BantuDicoHistoryRealmStorage {
     ///   - completion: losure called when task is finished.
     func deleteAllTranslations(queue: DispatchQueue = DispatchQueue.main, completion: @escaping BDDeleteTranslationsCompletionHandler) {
         
-        operationQueue.addOperation {
-            
+        dispatchQueue.async {
             let realm = try! Realm()
-            
             do {
                 try realm.write {
                     realm.deleteAll()
-                    queue.async { completion(true, nil) }
-                }
-            } catch let error {
-                queue.async { completion(false, error) }
-            }
-        }
-    }
-}
-
-//MARK: - Favorites
-
-public extension BantuDicoHistoryRealmStorage {
-    
-    /// Add translation to favorites and saves it to history.
-    ///
-    /// - Parameters:
-    ///   - translation: translation to add or remove from favorites.
-    ///   - isFavorite: if true then translation will be added to favories. If false then translation will be removed from favorites.
-    ///   - queue: the queue on which the completion will be called.
-    ///   - completion: closure called when task is finished.
-    public func addTranslationToFavorites(_ translation: BDRealmTranslation,
-                                   queue: DispatchQueue = DispatchQueue.main,
-                                   completion: @escaping BDAddTranslationToFavoritesCompletionHandler) {
-        operationQueue.addOperation { [weak self] in
-            self?.addTranslationToFavorites(word: translation.word, language: translation.language, translationLanguage: translation.translationLanguage, translations: translation.translations, queue: queue, completion: completion)
-        }
-        
-    }
-    
-    /// Add translation from favorites and saves it to history.
-    ///
-    /// - Parameters:
-    ///   - word: the word to translate.
-    ///   - language: the language of the word.
-    ///   - translationLanguage: the language to which the word is translated.
-    ///   - queue: the queue on which the completion will be called.
-    ///   - translations: the translations of the word.
-    ///   - completion: closure called when task is finished.
-    public func addTranslationToFavorites(word: String, language: String,
-                                   translationLanguage: String, translations: [String],
-                                   queue: DispatchQueue = DispatchQueue.main,
-                                   completion: @escaping BDAddTranslationToFavoritesCompletionHandler) {
-        createOrUpdateTranslationHistory(word: word, language: language, translationLanguage: translationLanguage, isFavorite: true, translations: translations, completion: { (success, error) in
-            queue.async { completion(success, error) }
-        })
-    }
-    
-    /// Remove a translation from favorites. If a translation is not favorite or does not exist then operation will finish with success.
-    ///
-    /// - Parameters:
-    ///   - translation: translation to remove from favorites.
-    ///   - queue: the queue on which the completion will be called.
-    ///   - completion: closure called when task is finished.
-    public func removeTranslationFromFavorites(_ translation: BDRealmTranslation,
-                                        queue: DispatchQueue = DispatchQueue.main,
-                                        completion: @escaping BDRemoveTranslationFromFavoritesCompletionHandler) {
-        let predicate = NSPredicate(format: "word == %@ AND language == %@ AND translationLanguage == %@ AND isFavorite == true", translation.word, translation.language, translation.translationLanguage)
-        fetchRealmTranslations(predicate: predicate) { realmTranslationRefs in
-            let realm = try! Realm()
-            
-            guard let realmTranslationRef = realmTranslationRefs.first else {
-                queue.async { completion(true, nil) }
-                return
-            }
-            
-            guard let realmTranslation = realm.resolve(realmTranslationRef) else {
-                queue.async { completion(false, nil) }
-                return
-            }
-            
-            do {
-                try realm.write {
-                    realmTranslation.isFavorite = false
                     queue.async { completion(true, nil) }
                 }
             } catch let error {
@@ -301,7 +233,6 @@ public extension BantuDicoHistoryRealmStorage {
 
 private extension BantuDicoHistoryRealmStorage {
     
-    private typealias BDFetchRealmTranslationCompletionHandler = ([ThreadSafeReference<RealmTranslation>]) -> Void
     private typealias BDCreateOrUpdateCompletionHandler = (Bool, Error?) -> Void
     
     /// Fetches BDRealmTranslationResult object from data base.
@@ -311,32 +242,52 @@ private extension BantuDicoHistoryRealmStorage {
     ///   - language: the language of word.
     ///   - translationLanguage: the language to which the word is translated.
     ///   - completion: closure called when task is finished.
-    private func fetchRealmTranslations(predicate: NSPredicate, completion: @escaping BDFetchRealmTranslationCompletionHandler) {
-        operationQueue.addOperation {
-            let realm = try! Realm()
-            let result = realm.objects(RealmTranslation.self).filter(predicate)
-            completion(result.map({ ThreadSafeReference(to: $0) }))
+    private func realmTranslations(predicate: NSPredicate, realm: Realm) -> [RealmTranslation]? {
+        
+        guard realm.objects(RealmTranslation.self).filter(predicate).count > 0 else {
+            return nil
         }
+        
+        return Array(realm.objects(RealmTranslation.self).filter(predicate))
     }
     
-    /// Insert a new translation in data base or update the existing one.
-    ///
-    /// - Parameters:
-    ///   - word: the translated word.
-    ///   - language: the language of word.
-    ///   - translationLanguage: the language to which the word is translated.
-    ///   - translations: the translations of word.
-    ///   - completion: closure called when task is finished.
-    private func createOrUpdateTranslationHistory(word: String, language: String,
-                                          translationLanguage: String, isFavorite: Bool,
-                                          translations: [String],
-                                          completion: @escaping BDCreateOrUpdateCompletionHandler) {
-        operationQueue.addOperation {
+    private func realmTranslation(predicate: NSPredicate, realm: Realm) -> RealmTranslation? {
+        return realm.objects(RealmTranslation.self).filter(predicate).first
+    }
+    
+    private func createOrUpdateTranslation(_ translation: BDRealmTranslation, completion: @escaping BDCreateOrUpdateCompletionHandler) {
+        
+        dispatchQueue.async { [weak self] in
             let realm = try! Realm()
             do {
                 try realm.write {
-                    let translation = RealmTranslation(word: word, language: language, translationLanguage: translationLanguage, isFavorite: isFavorite, translations: translations)
-                    realm.add(translation, update: true)
+                    
+                    let predicate = NSPredicate(format: "word == %@ AND language == %@ AND translationLanguage == %@", translation.word, translation.language, translation.translationLanguage)
+                    
+                    var translationToUpdate: RealmTranslation
+                    // In this case the object already exists in data base.
+                    if let realmTranslation = self?.realmTranslation(predicate: predicate, realm: realm) {
+                        
+                        //In this case, it means that save date should be updated.
+                        if realmTranslation.isFavorite == translation.isFavorite {
+                            realmTranslation.saveDate = Date()
+                            translation.saveDate = Date()
+                        }
+                        
+                        realmTranslation.isFavorite = translation.isFavorite
+                        
+                        let translations = List<String>()
+                        translations.append(objectsIn: translation.translations.sorted())
+                        realmTranslation.translations = translations
+                        
+                        translationToUpdate = realmTranslation
+                    } else {
+                        translationToUpdate = RealmTranslation(word: translation.word, language: translation.language, translationLanguage: translation.translationLanguage, isFavorite: translation.isFavorite, translations: translation.translations)
+                        translationToUpdate.saveDate = Date()
+                        translation.saveDate = Date()
+                    }
+                    
+                    realm.add(translationToUpdate, update: true)
                     completion(true, nil)
                 }
             } catch let error {
@@ -345,3 +296,4 @@ private extension BantuDicoHistoryRealmStorage {
         }
     }
 }
+

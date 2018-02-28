@@ -11,15 +11,20 @@ import RealmSwift
 
 class RealmTranslation: Object {
     
+    @objc public dynamic var identifier: String = ""
     @objc dynamic var word = ""
     @objc dynamic var language = ""
     @objc dynamic var translationLanguage = ""
-    @objc dynamic var isFavorite = false
-    @objc public dynamic var identifier: String = ""
+    @objc dynamic var isFavorite = false {
+        didSet {
+            favoriteDate = isFavorite ? Date() : nil
+        }
+    }
+    @objc dynamic var saveDate: Date = Date()
+    @objc dynamic var favoriteDate: Date?
     var translations = List<String>()
     
-    convenience init(word: String, language: String, translationLanguage: String,
-                     isFavorite: Bool, translations: [String]) {
+    convenience init(word: String, language: String, translationLanguage: String, isFavorite: Bool, translations: [String]) {
         self.init()
         setCompoundWord(word: word)
         setCompoundLanguage(language: language)
@@ -27,7 +32,7 @@ class RealmTranslation: Object {
         self.isFavorite = isFavorite
         
         self.translations = List<String>()
-        self.translations.append(objectsIn: translations)
+        self.translations.append(objectsIn: translations.sorted())
     }
     
     override static func primaryKey() -> String? {

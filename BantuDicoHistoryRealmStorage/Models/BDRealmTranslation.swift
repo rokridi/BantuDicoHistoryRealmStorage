@@ -9,10 +9,10 @@
 import Foundation
 
 /// Represents a translation saved in data base.
-public struct BDRealmTranslation {
+public class BDRealmTranslation {
     
     /// Identifier of the translation. Its format is: word-language-translationLanguage
-    public var identifier: String
+    public let identifier: String
     
     /// The translated word.
     public let word: String
@@ -24,10 +24,20 @@ public struct BDRealmTranslation {
     public let translationLanguage: String
     
     /// The translation is favorite or not.
-    public let isFavorite: Bool
+    public var isFavorite: Bool = false {
+        didSet {
+            favoriteDate = isFavorite ? Date() : nil
+        }
+    }
     
     /// Translations of word.
-    public let translations: [String]
+    public var translations: [String]
+    
+    // The date the translation is saved.
+    public var saveDate: Date?
+    
+    // The date the translation became favorite.
+    public private(set) var favoriteDate: Date?
     
     /// Create an instance of BDRealmTranslation.
     ///
@@ -37,7 +47,19 @@ public struct BDRealmTranslation {
     ///   - translationLanguage: translation language.
     ///   - isFavorite: translation is favorite or not.
     ///   - translations: translations of word.
-    public init(word: String, language: String, translationLanguage: String, isFavorite: Bool, translations: [String]) {
+    public init(word: String, language: String, translationLanguage: String, isFavorite: Bool, translations: [String]) throws {
+        
+        guard word.isValidWord() else {
+            throw BDRealmStorageError.invalidWord(word)
+        }
+        
+        guard language.isValidLanguage() else {
+            throw BDRealmStorageError.invalidLanguage(language)
+        }
+        
+        guard language.isValidLanguage() else {
+            throw BDRealmStorageError.invalidLanguage(language)
+        }
         
         identifier = "\(word)-\(language)-\(translationLanguage)"
         self.word = word
@@ -45,16 +67,12 @@ public struct BDRealmTranslation {
         self.translationLanguage = translationLanguage
         self.isFavorite = isFavorite
         self.translations = translations
+        favoriteDate = isFavorite ? Date() : nil
     }
 }
 
 extension BDRealmTranslation {
-    init(realmTranslation: RealmTranslation) {
-        identifier = realmTranslation.identifier
-        word = realmTranslation.word
-        language = realmTranslation.language
-        translationLanguage = realmTranslation.translationLanguage
-        isFavorite = realmTranslation.isFavorite
-        translations = Array(realmTranslation.translations).sorted()
+    convenience init(realmTranslation: RealmTranslation) throws {
+        try self.init(word: realmTranslation.word, language: realmTranslation.language, translationLanguage: realmTranslation.translationLanguage, isFavorite: realmTranslation.isFavorite, translations: Array(realmTranslation.translations).sorted())
     }
 }
