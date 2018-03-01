@@ -9,7 +9,7 @@
 import Foundation
 
 /// Represents a translation saved in data base.
-public class BDRealmTranslation {
+public struct BDRealmTranslation {
     
     /// Identifier of the translation. Its format is: word-language-translationLanguage
     public let identifier: String
@@ -24,20 +24,25 @@ public class BDRealmTranslation {
     public let translationLanguage: String
     
     /// The translation is favorite or not.
-    public var isFavorite: Bool = false {
+    public var isFavorite: Bool {
         didSet {
             favoriteDate = isFavorite ? Date() : nil
         }
     }
     
     /// Translations of word.
-    public var translations: [String]
+    public let translations: [String]
     
     // The date the translation is saved.
     public var saveDate: Date?
     
     // The date the translation became favorite.
     public private(set) var favoriteDate: Date?
+}
+
+//MARK: Initialization
+
+extension BDRealmTranslation {
     
     /// Create an instance of BDRealmTranslation.
     ///
@@ -50,15 +55,19 @@ public class BDRealmTranslation {
     public init(word: String, language: String, translationLanguage: String, isFavorite: Bool, translations: [String]) throws {
         
         guard word.isValidWord() else {
-            throw BDRealmStorageError.invalidWord(word)
+            throw BDRealmTranslationError.invalidWord(word)
         }
         
         guard language.isValidLanguage() else {
-            throw BDRealmStorageError.invalidLanguage(language)
+            throw BDRealmTranslationError.invalidLanguage(language)
         }
         
         guard language.isValidLanguage() else {
-            throw BDRealmStorageError.invalidLanguage(language)
+            throw BDRealmTranslationError.invalidLanguage(language)
+        }
+        
+        guard !translations.isEmpty else {
+            throw BDRealmTranslationError.invalidTranslations(translations)
         }
         
         identifier = "\(word)-\(language)-\(translationLanguage)"
@@ -69,10 +78,16 @@ public class BDRealmTranslation {
         self.translations = translations
         favoriteDate = isFavorite ? Date() : nil
     }
-}
-
-extension BDRealmTranslation {
-    convenience init(realmTranslation: RealmTranslation) throws {
+    
+    init(realmTranslation: RealmTranslation) throws {
         try self.init(word: realmTranslation.word, language: realmTranslation.language, translationLanguage: realmTranslation.translationLanguage, isFavorite: realmTranslation.isFavorite, translations: Array(realmTranslation.translations).sorted())
     }
 }
+
+public extension BDRealmTranslation {
+    
+    mutating func updateWithTranslation(_ translation: BDRealmTranslation) {
+        self = translation
+    }
+}
+

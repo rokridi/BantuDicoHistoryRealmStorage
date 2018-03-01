@@ -17,4 +17,8 @@ extension String {
     func isValidLanguage() -> Bool {
         return range(of: "^[a-zA-Z]{2}", options: .regularExpression) != nil
     }
+    
+    func isValidFileName() -> Bool {
+        return range(of: "^[0-9a-zA-Z_]", options: .regularExpression) != nil
+    }
 }

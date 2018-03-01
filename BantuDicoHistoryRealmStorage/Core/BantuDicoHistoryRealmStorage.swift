@@ -11,7 +11,7 @@ import RealmSwift
 
 public typealias BDFetchTranslationCompletionHandler = (BDRealmTranslation?, Error?) -> Void
 public typealias BDFetchTranslationsCompletionHandler = ([BDRealmTranslation]?, Error?) -> Void
-public typealias BDSaveTranslationCompletionHandler = (Bool, Error?) -> Void
+public typealias BDSaveTranslationCompletionHandler = (Bool, BDRealmTranslation?, Error?) -> Void
 public typealias BDDeleteTranslationsCompletionHandler = (Bool, Error?) -> Void
 public typealias BDAddTranslationToFavoritesCompletionHandler = (Bool, Error?) -> Void
 public typealias BDRemoveTranslationFromFavoritesCompletionHandler = (Bool, Error?) -> Void
@@ -33,10 +33,13 @@ public class BantuDicoHistoryRealmStorage {
     /// Creates an instance of BantuDicoHistoryRealmStorage.
     ///
     /// - Parameters:
-    ///   - storeName: name of the data base.
-    ///   - storeType: type of the store (in memory or persistent).
-    public init(storeName: String, storeType: StoreType = .persistent) {
+    ///   - storeName: name of the data base. Default value is 'BantuDicoHistoryRealmStorage'
+    ///   - storeType: type of the store (in memory or persistent). Default value is 'persistent'
+    public init(storeName: String = "BantuDicoHistoryRealmStorage", storeType: StoreType = .persistent) throws {
         
+        guard storeName.isValidFileName() else {
+            throw BDRealmStorageError.dataBaseCreationFailed(reason: .invalidStoreName(storeName))
+        }
         var config = Realm.Configuration()
         if storeType == .inMemory {
             config.inMemoryIdentifier = storeName
@@ -60,23 +63,7 @@ public extension BantuDicoHistoryRealmStorage {
     ///   - queue: the queue on which the completion will be called.
     ///   - completion: closure called when task is finished.
     public func translation(word: String, language: String, translationLanguage: String,
-                            queue: DispatchQueue = DispatchQueue.main, completion: @escaping BDFetchTranslationCompletionHandler) throws {
-        
-        guard word.isValidWord() else {
-            throw BDRealmStorageError.invalidWord(word)
-        }
-        
-        guard language.isValidLanguage() else {
-            throw BDRealmStorageError.invalidLanguage(language)
-        }
-        
-        guard language.isValidLanguage() else {
-            throw BDRealmStorageError.invalidLanguage(translationLanguage)
-        }
-        
-        guard word.isValidWord() else {
-            throw BDRealmStorageError.invalidWord(word)
-        }
+                            queue: DispatchQueue = DispatchQueue.main, completion: @escaping BDFetchTranslationCompletionHandler) {
         
         dispatchQueue.async {
             
@@ -164,8 +151,8 @@ extension BantuDicoHistoryRealmStorage {
     public func saveTranslation(_ translation: BDRealmTranslation,
                                 queue: DispatchQueue = DispatchQueue.main,
                                 completion: @escaping BDSaveTranslationCompletionHandler) {
-        createOrUpdateTranslation(translation) { success, error in
-            queue.async { completion(success, error) }
+        createOrUpdateTranslation(translation) { success, translation, error in
+            queue.async { completion(success, translation, error) }
         }
     }
 }
@@ -203,7 +190,7 @@ extension BantuDicoHistoryRealmStorage {
                     queue.async { completion(true, nil) }
                 }
             } catch let error {
-                completion(false, error)
+                completion(false, BDRealmStorageError.dataBaseOperationFailed(reason: .realmWriteFailed(error)))
             }
         }
     }
@@ -223,7 +210,7 @@ extension BantuDicoHistoryRealmStorage {
                     queue.async { completion(true, nil) }
                 }
             } catch let error {
-                queue.async { completion(false, error) }
+                queue.async { completion(false, BDRealmStorageError.dataBaseOperationFailed(reason: .realmWriteFailed(error))) }
             }
         }
     }
@@ -233,7 +220,7 @@ extension BantuDicoHistoryRealmStorage {
 
 private extension BantuDicoHistoryRealmStorage {
     
-    private typealias BDCreateOrUpdateCompletionHandler = (Bool, Error?) -> Void
+    private typealias BDCreateOrUpdateCompletionHandler = (Bool, BDRealmTranslation?, Error?) -> Void
     
     /// Fetches BDRealmTranslationResult object from data base.
     ///
@@ -271,7 +258,6 @@ private extension BantuDicoHistoryRealmStorage {
                         //In this case, it means that save date should be updated.
                         if realmTranslation.isFavorite == translation.isFavorite {
                             realmTranslation.saveDate = Date()
-                            translation.saveDate = Date()
                         }
                         
                         realmTranslation.isFavorite = translation.isFavorite
@@ -283,15 +269,13 @@ private extension BantuDicoHistoryRealmStorage {
                         translationToUpdate = realmTranslation
                     } else {
                         translationToUpdate = RealmTranslation(word: translation.word, language: translation.language, translationLanguage: translation.translationLanguage, isFavorite: translation.isFavorite, translations: translation.translations)
-                        translationToUpdate.saveDate = Date()
-                        translation.saveDate = Date()
                     }
                     
                     realm.add(translationToUpdate, update: true)
-                    completion(true, nil)
+                    completion(true, try! BDRealmTranslation(realmTranslation: translationToUpdate), nil)
                 }
             } catch let error {
-                completion(false, error)
+                completion(false, nil, BDRealmStorageError.dataBaseOperationFailed(reason: .realmWriteFailed(error)))
             }
         }
     }

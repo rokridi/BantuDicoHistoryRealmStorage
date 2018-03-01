@@ -44,9 +44,54 @@ class ModelsSpec: QuickSpec {
             
             context("Update", {
                 it("should update the translation from favorite to not favorite", closure: {
-                    let translation = try! BDRealmTranslation(word: "hello", language: "en", translationLanguage: "fr", isFavorite: false, translations: ["salut"])
+                    var translation = try! BDRealmTranslation(word: "hello", language: "en", translationLanguage: "fr", isFavorite: true, translations: ["salut"])
                     translation.isFavorite = false
                     expect(translation.favoriteDate).to(beNil())
+                })
+            })
+            
+            context("Create a translations with invalid word parameters", {
+                let wrongWord = ")oi,7"
+                let wrongLanguage = "A32"
+                let invalidTranslations: [String] = []
+                it("Should throw invalid word error with word: \(wrongWord)", closure: {
+                    
+                    
+                    expect {
+                        try BDRealmTranslation(word: wrongWord, language: "en", translationLanguage: "fr", isFavorite: false, translations: ["salut"])}
+                    .to(throwError { (error: Error) in
+                        if case BDRealmTranslationError.invalidWord(let word) = error {
+                            expect(word).to(equal(word))
+                        } else {
+                            fail()
+                        }
+                    })
+                })
+                
+                it("Should throw invalid language error", closure: {
+                    
+                    expect {
+                        try BDRealmTranslation(word: "hello", language: wrongLanguage, translationLanguage: "fr", isFavorite: false, translations: ["salut"]) }
+                    .to(throwError { (error: Error) in
+                        if case BDRealmTranslationError.invalidLanguage(let language) = error {
+                            expect(language).to(equal(wrongLanguage))
+                        } else {
+                            fail()
+                        }
+                    })
+                })
+                
+                it("Should throw invalid translations error", closure: {
+                    
+                    expect {
+                        try BDRealmTranslation(word: "hello", language: "en", translationLanguage: "fr", isFavorite: false, translations: invalidTranslations) }
+                    .to(throwError { (error: Error) in
+                        if case BDRealmTranslationError.invalidTranslations(let translations) = error {
+                            expect(translations).to(equal(invalidTranslations))
+                        } else {
+                            fail()
+                        }
+                    })
                 })
             })
         }

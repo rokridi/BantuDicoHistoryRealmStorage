@@ -16,6 +16,7 @@
 		1EE3CA602046C39B004F9356 /* ModelsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE3CA5F2046C39B004F9356 /* ModelsSpec.swift */; };
 		1EE3CA642046F3F6004F9356 /* String+validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE3CA632046F3F6004F9356 /* String+validation.swift */; };
 		1EE3CA66204701B3004F9356 /* BDRealmStorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE3CA65204701B3004F9356 /* BDRealmStorageError.swift */; };
+		1EE3CA68204810EF004F9356 /* BDRealmTranslationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE3CA67204810EF004F9356 /* BDRealmTranslationError.swift */; };
 		9CA419EFDC9410F1FD16C37B /* Pods_BantuDicoHistoryRealmStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D48457BB011AAEF140C166 /* Pods_BantuDicoHistoryRealmStorage.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,7 @@
 		1EE3CA5F2046C39B004F9356 /* ModelsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelsSpec.swift; sourceTree = "<group>"; };
 		1EE3CA632046F3F6004F9356 /* String+validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+validation.swift"; sourceTree = "<group>"; };
 		1EE3CA65204701B3004F9356 /* BDRealmStorageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDRealmStorageError.swift; sourceTree = "<group>"; };
+		1EE3CA67204810EF004F9356 /* BDRealmTranslationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDRealmTranslationError.swift; sourceTree = "<group>"; };
 		549D02FA703F46D5882BD592 /* Pods-BantuDicoHistoryRealmStorageTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BantuDicoHistoryRealmStorageTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BantuDicoHistoryRealmStorageTests/Pods-BantuDicoHistoryRealmStorageTests.debug.xcconfig"; sourceTree = "<group>"; };
 		63D12CB1B242D70DE4D70494 /* Pods-BantuDicoHistoryRealmStorage-BantuDicoStorage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BantuDicoHistoryRealmStorage-BantuDicoStorage.release.xcconfig"; path = "Pods/Target Support Files/Pods-BantuDicoHistoryRealmStorage-BantuDicoStorage/Pods-BantuDicoHistoryRealmStorage-BantuDicoStorage.release.xcconfig"; sourceTree = "<group>"; };
 		68D48457BB011AAEF140C166 /* Pods_BantuDicoHistoryRealmStorage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BantuDicoHistoryRealmStorage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -128,6 +130,7 @@
 			children = (
 				1E159BFF203B31F5001B9FD6 /* BantuDicoHistoryRealmStorage.swift */,
 				1EE3CA65204701B3004F9356 /* BDRealmStorageError.swift */,
+				1EE3CA67204810EF004F9356 /* BDRealmTranslationError.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 				1E159C00203B31F5001B9FD6 /* BantuDicoHistoryRealmStorage.swift in Sources */,
 				1E159BFD203B2F99001B9FD6 /* RealmTranslation.swift in Sources */,
 				1EE3CA642046F3F6004F9356 /* String+validation.swift in Sources */,
+				1EE3CA68204810EF004F9356 /* BDRealmTranslationError.swift in Sources */,
 				1EE3CA66204701B3004F9356 /* BDRealmStorageError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
