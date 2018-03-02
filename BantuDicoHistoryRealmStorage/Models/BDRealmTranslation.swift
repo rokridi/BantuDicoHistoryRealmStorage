@@ -23,6 +23,9 @@ public struct BDRealmTranslation {
     /// Language of the translation.
     public let translationLanguage: String
     
+    /// The URL to a mp3 file representing the sound of the word.
+    public let soundURL: String
+    
     /// The translation is favorite or not.
     public var isFavorite: Bool {
         didSet {
@@ -38,11 +41,6 @@ public struct BDRealmTranslation {
     
     // The date the translation became favorite.
     public private(set) var favoriteDate: Date?
-}
-
-//MARK: Initialization
-
-extension BDRealmTranslation {
     
     /// Create an instance of BDRealmTranslation.
     ///
@@ -50,37 +48,27 @@ extension BDRealmTranslation {
     ///   - word: translated word.
     ///   - language: language of word.
     ///   - translationLanguage: translation language.
+    ///   - soundURL: the URL to a mp3 file representing the sound of the word.
     ///   - isFavorite: translation is favorite or not.
     ///   - translations: translations of word.
-    public init(word: String, language: String, translationLanguage: String, isFavorite: Bool, translations: [String]) throws {
-        
-        guard word.isValidWord() else {
-            throw BDRealmTranslationError.invalidWord(word)
-        }
-        
-        guard language.isValidLanguage() else {
-            throw BDRealmTranslationError.invalidLanguage(language)
-        }
-        
-        guard language.isValidLanguage() else {
-            throw BDRealmTranslationError.invalidLanguage(language)
-        }
-        
-        guard !translations.isEmpty else {
-            throw BDRealmTranslationError.invalidTranslations(translations)
-        }
-        
+    init(word: String, language: String, translationLanguage: String, soundURL: String, isFavorite: Bool, translations: [String]) {
         identifier = "\(word)-\(language)-\(translationLanguage)"
         self.word = word
         self.language = language
         self.translationLanguage = translationLanguage
+        self.soundURL = soundURL
         self.isFavorite = isFavorite
         self.translations = translations
         favoriteDate = isFavorite ? Date() : nil
     }
+}
+
+//MARK: Initialization
+
+extension BDRealmTranslation {
     
-    init(realmTranslation: RealmTranslation) throws {
-        try self.init(word: realmTranslation.word, language: realmTranslation.language, translationLanguage: realmTranslation.translationLanguage, isFavorite: realmTranslation.isFavorite, translations: Array(realmTranslation.translations).sorted())
+    init(realmTranslation: RealmTranslation) {
+        self.init(word: realmTranslation.word, language: realmTranslation.language, translationLanguage: realmTranslation.translationLanguage, soundURL: realmTranslation.soundURL, isFavorite: realmTranslation.isFavorite, translations: Array(realmTranslation.translations).sorted())
     }
 }
 

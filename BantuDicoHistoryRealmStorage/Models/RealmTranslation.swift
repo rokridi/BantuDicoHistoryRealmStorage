@@ -13,7 +13,7 @@ import RealmSwift
 class RealmTranslation: Object {
     
     /// Identifier of the translation.
-    @objc public dynamic var identifier: String = ""
+    @objc dynamic var identifier: String = ""
     
     /// The translated word.
     @objc dynamic var word = ""
@@ -23,6 +23,9 @@ class RealmTranslation: Object {
     
     /// The translation language.
     @objc dynamic var translationLanguage = ""
+    
+    /// The URL to a mp3 file representing the sound of the word.
+    @objc dynamic var soundURL: String = ""
     
     /// Translation is favorite or not.
     @objc dynamic var isFavorite = false {
@@ -53,39 +56,18 @@ extension RealmTranslation {
     ///   - word: translated word.
     ///   - language: language of word.
     ///   - translationLanguage: the translation language.
+    ///   - soundURL: the URL to a mp3 file representing the sound of the word.
     ///   - isFavorite: translation is favorite or not.
     ///   - translations: translations of the word.
-    convenience init(word: String, language: String, translationLanguage: String, isFavorite: Bool, translations: [String]) {
+    convenience init(identifier: String, word: String, language: String, translationLanguage: String, soundURL: String, isFavorite: Bool, translations: [String]) {
         self.init()
-        setCompoundWord(word: word)
-        setCompoundLanguage(language: language)
-        setCompoundTranslationLanguage(translationLanguage: translationLanguage)
+        self.identifier = identifier
+        self.word = word
+        self.language = language
+        self.translationLanguage = translationLanguage
+        self.soundURL = soundURL
         self.isFavorite = isFavorite
         self.translations = List<String>()
         self.translations.append(objectsIn: translations.sorted())
-    }
-}
-
-//MARK: - Translation identifier.
-
-extension RealmTranslation {
-    
-    func setCompoundWord(word: String) {
-        self.word = word
-        identifier = identifierValue()
-    }
-    
-    func setCompoundLanguage(language: String) {
-        self.language = language
-        identifier = identifierValue()
-    }
-    
-    func setCompoundTranslationLanguage(translationLanguage: String) {
-        self.translationLanguage = translationLanguage
-        identifier = identifierValue()
-    }
-    
-    private func identifierValue() -> String {
-        return "\(word)-\(language)-\(translationLanguage)"
     }
 }
