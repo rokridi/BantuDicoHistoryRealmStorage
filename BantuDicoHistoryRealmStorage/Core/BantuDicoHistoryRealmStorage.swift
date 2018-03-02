@@ -63,7 +63,8 @@ public extension BantuDicoHistoryRealmStorage {
     ///   - queue: the queue on which the completion will be called.
     ///   - completion: closure called when task is finished.
     public func tanslationsBeginningWith(_ beginning: String, language: String, translationLanguage: String, queue: DispatchQueue = DispatchQueue.main, completion: @escaping (Result<[BDRealmTranslation]>) -> Void) {
-        dispatchQueue.async {
+        dispatchQueue.async { [weak self] in
+            guard let `self` = self else { return }
             let realm = try! Realm()
             let predicate = NSPredicate(format: "word BEGINSWITH[c] %@ AND language == %@ AND translationLanguage == %@", beginning, language, translationLanguage)
             let result = self.realmTranslations(predicate: predicate, realm: realm).map({ BDRealmTranslation(realmTranslation: $0) }).sorted(by: { $0.word <= $1.word })
@@ -90,8 +91,9 @@ public extension BantuDicoHistoryRealmStorage {
     ///   - queue: the queue on which the completion will be called.
     ///   - completion: closure called when task is finished.
     public func allFavorites(queue: DispatchQueue = DispatchQueue.main, completion: @escaping (Result<[BDRealmTranslation]>) -> Void) {
-        dispatchQueue.async {
+        dispatchQueue.async { [weak self] in
             
+            guard let `self` = self else { return }
             let realm = try! Realm()
             let predicate = NSPredicate(format: "isFavorite == true")
             let favorites = self.realmTranslations(predicate: predicate, realm: realm)
@@ -181,12 +183,12 @@ extension BantuDicoHistoryRealmStorage {
         
         dispatchQueue.async { [weak self] in
             
-            guard let stongSelf = self else { return }
+            guard let `self` = self else { return }
             let predicate = NSPredicate(format: "identifier IN %@", identifiers)
             
             let realm = try! Realm()
             
-            let realmTranslations = stongSelf.realmTranslations(predicate: predicate, realm: realm)
+            let realmTranslations = self.realmTranslations(predicate: predicate, realm: realm)
             
             do {
                 try realm.write {
@@ -262,6 +264,8 @@ private extension BantuDicoHistoryRealmStorage {
                                            translations: [String],
                                            completion: @escaping (Result<BDRealmTranslation>) -> Void) {
         dispatchQueue.async { [weak self] in
+            
+            guard let `self` = self else { return }
             let realm = try! Realm()
             do {
                 try realm.write {
@@ -270,7 +274,7 @@ private extension BantuDicoHistoryRealmStorage {
                     
                     var translationToUpdate: RealmTranslation
                     // In this case the object already exists in data base.
-                    if let realmTranslation = self?.realmTranslation(predicate: predicate, realm: realm) {
+                    if let realmTranslation = self.realmTranslation(predicate: predicate, realm: realm) {
                         
                         realmTranslation.saveDate = Date()
                         
