@@ -126,7 +126,9 @@ public extension BantuDicoHistoryRealmStorage {
                                 translations: [String],
                                 queue: DispatchQueue = DispatchQueue.main,
                                 completion: @escaping (Result<BDRealmTranslation>) -> Void) {
-        createOrUpdateTranslation(identifier: identifier, word: word, language: language, translationLanguage: translationLanguage, soundURL: soundURL, translations: translations, completion: completion)
+        createOrUpdateTranslation(identifier: identifier, word: word, language: language, translationLanguage: translationLanguage, soundURL: soundURL, translations: translations) { result in
+            queue.async { completion(result) }
+        }
     }
 }
 
@@ -141,7 +143,7 @@ public extension BantuDicoHistoryRealmStorage {
     ///   - isFavorite: if 'true' then the translation is added to favorites. Otherwise, it is removed from favorites.
     ///   - queue: the queue on which the completion will be called.
     ///   - completion: closure called when task is finished.
-    private func addRemoveFavorite(translationIdentifier: String, isFavorite: Bool,
+    public func addRemoveFavorite(translationIdentifier: String, isFavorite: Bool,
                                    queue: DispatchQueue = DispatchQueue.main,
                                    completion: @escaping (Result<BDRealmTranslation>) -> Void) {
         dispatchQueue.async {
@@ -149,16 +151,20 @@ public extension BantuDicoHistoryRealmStorage {
             let predicate = NSPredicate(format: "identifier == %@", translationIdentifier)
             
             guard let realmTranslation = self.realmTranslation(predicate: predicate, realm: realm) else {
-                completion(.failure(BDRealmStorageError.dataBaseOperationFailed(reason: .translationNotFound(identifier: translationIdentifier))))
+                queue.async {
+                    completion(.failure(BDRealmStorageError.dataBaseOperationFailed(reason: .translationNotFound(identifier: translationIdentifier))))
+                }
                 return
             }
             
             do {
                 try realm.write {
-                    realmTranslation.isFavorite = true
+                    realmTranslation.isFavorite = isFavorite
                     realm.add(realmTranslation, update: true)
                     let translation = BDRealmTranslation(realmTranslation: realmTranslation)
-                    queue.async { completion(.success(translation)) }
+                    queue.async {
+                        completion(.success(translation))
+                    }
                 }
             } catch let error {
                 queue.async {
@@ -173,10 +179,45 @@ public extension BantuDicoHistoryRealmStorage {
 
 extension BantuDicoHistoryRealmStorage {
     
+    /// Delete a translation.
+    ///
+    /// - Parameters:
+    ///   - identifier: identifier of the translation to delete.
+    ///   - queue: the queue on which the completion will be called.
+    ///   - completion: closure called when task is finished.
+    func deleteTranslation(_ identifier: String, queue: DispatchQueue = DispatchQueue.main, completion: @escaping (Result<Void>) -> Void) {
+        
+        dispatchQueue.async { [weak self] in
+            
+            guard let `self` = self else { return }
+            let predicate = NSPredicate(format: "identifier == %@", identifier)
+            
+            let realm = try! Realm()
+            
+            guard let realmTranslation = self.realmTranslation(predicate: predicate, realm: realm) else {
+                queue.async {
+                    completion(.failure(BDRealmStorageError.dataBaseOperationFailed(reason: .translationNotFound(identifier: identifier))))
+                }
+                return
+            }
+            
+            do {
+                try realm.write {
+                    realm.delete(realmTranslation)
+                    queue.async { completion(.success(())) }
+                }
+            } catch let error {
+                queue.async {
+                    completion(.failure(BDRealmStorageError.dataBaseAccessFailed(reason: .writeFailed(error))))
+                }
+            }
+        }
+    }
+    
     /// Delete specific translations.
     ///
     /// - Parameters:
-    ///   - translations: translations to delete.
+    ///   - identifiers: identifiers of the translations to delete.
     ///   - queue: the queue on which the completion will be called.
     ///   - completion: closure called when task is finished.
     func deleteTranslations(_ identifiers: [String], queue: DispatchQueue = DispatchQueue.main, completion: @escaping (Result<Void>) -> Void) {
@@ -278,9 +319,9 @@ private extension BantuDicoHistoryRealmStorage {
                         
                         realmTranslation.saveDate = Date()
                         
-                        let translations = List<String>()
-                        translations.append(objectsIn: translations.sorted())
-                        realmTranslation.translations = translations
+                        let translationsList = List<String>()
+                        translationsList.append(objectsIn: translations)
+                        realmTranslation.translations = translationsList
                         
                         translationToUpdate = realmTranslation
                     } else {

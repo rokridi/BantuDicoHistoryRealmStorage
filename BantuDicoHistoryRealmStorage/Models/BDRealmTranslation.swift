@@ -51,8 +51,8 @@ public struct BDRealmTranslation {
     ///   - soundURL: the URL to a mp3 file representing the sound of the word.
     ///   - isFavorite: translation is favorite or not.
     ///   - translations: translations of word.
-    init(word: String, language: String, translationLanguage: String, soundURL: String, isFavorite: Bool, translations: [String]) {
-        identifier = "\(word)-\(language)-\(translationLanguage)"
+    init(identifier: String, word: String, language: String, translationLanguage: String, soundURL: String, isFavorite: Bool, translations: [String]) {
+        self.identifier = identifier
         self.word = word
         self.language = language
         self.translationLanguage = translationLanguage
@@ -68,7 +68,7 @@ public struct BDRealmTranslation {
 extension BDRealmTranslation {
     
     init(realmTranslation: RealmTranslation) {
-        self.init(word: realmTranslation.word, language: realmTranslation.language, translationLanguage: realmTranslation.translationLanguage, soundURL: realmTranslation.soundURL, isFavorite: realmTranslation.isFavorite, translations: Array(realmTranslation.translations).sorted())
+        self.init(identifier: realmTranslation.identifier, word: realmTranslation.word, language: realmTranslation.language, translationLanguage: realmTranslation.translationLanguage, soundURL: realmTranslation.soundURL, isFavorite: realmTranslation.isFavorite, translations: Array(realmTranslation.translations).sorted())
     }
 }
 

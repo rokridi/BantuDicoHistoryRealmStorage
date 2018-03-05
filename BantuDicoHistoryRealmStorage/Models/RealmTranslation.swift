@@ -38,7 +38,7 @@ class RealmTranslation: Object {
     @objc dynamic var saveDate: Date = Date()
     
     // The date at which the translation became favorite.
-    @objc dynamic var favoriteDate: Date?
+    @objc dynamic var favoriteDate: Date? = nil
     var translations = List<String>()
     
     override static func primaryKey() -> String? {
