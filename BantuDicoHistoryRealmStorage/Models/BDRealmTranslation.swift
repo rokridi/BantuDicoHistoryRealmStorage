@@ -62,20 +62,3 @@ public struct BDRealmTranslation {
         favoriteDate = isFavorite ? Date() : nil
     }
 }
-
-//MARK: Initialization
-
-extension BDRealmTranslation {
-    
-    init(realmTranslation: RealmTranslation) {
-        self.init(identifier: realmTranslation.identifier, word: realmTranslation.word, language: realmTranslation.language, translationLanguage: realmTranslation.translationLanguage, soundURL: realmTranslation.soundURL, isFavorite: realmTranslation.isFavorite, translations: Array(realmTranslation.translations).sorted())
-    }
-}
-
-public extension BDRealmTranslation {
-    
-    mutating func updateWithTranslation(_ translation: BDRealmTranslation) {
-        self = translation
-    }
-}
-

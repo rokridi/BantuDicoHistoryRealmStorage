@@ -10,11 +10,19 @@
 		117FBCDF4E00E644F9274B4A /* Pods_BantuDicoHistoryRealmStorageTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13BBEB9E9635966E38891045 /* Pods_BantuDicoHistoryRealmStorageTests.framework */; };
 		1E159BEB203B15BC001B9FD6 /* BantuDicoHistoryRealmStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E159BE1203B15BC001B9FD6 /* BantuDicoHistoryRealmStorage.framework */; };
 		1E159BF2203B15BC001B9FD6 /* BantuDicoHistoryRealmStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E159BE4203B15BC001B9FD6 /* BantuDicoHistoryRealmStorage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1E159BFD203B2F99001B9FD6 /* RealmTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E159BFC203B2F99001B9FD6 /* RealmTranslation.swift */; };
+		1E159BFD203B2F99001B9FD6 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E159BFC203B2F99001B9FD6 /* Translation.swift */; };
 		1E159C00203B31F5001B9FD6 /* BantuDicoHistoryRealmStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E159BFF203B31F5001B9FD6 /* BantuDicoHistoryRealmStorage.swift */; };
-		1E159C02203B3AC3001B9FD6 /* BDRealmTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E159C01203B3AC3001B9FD6 /* BDRealmTranslation.swift */; };
 		1EB9EE64204943C900DBA0AE /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB9EE63204943C900DBA0AE /* Result.swift */; };
 		1EB9EE66204D3CD900DBA0AE /* DataBaseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB9EE65204D3CD900DBA0AE /* DataBaseSpec.swift */; };
+		1EB9EE73204E839400DBA0AE /* Persistable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB9EE72204E839400DBA0AE /* Persistable.swift */; };
+		1EB9EE75204E86EC00DBA0AE /* Modelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB9EE74204E86EC00DBA0AE /* Modelable.swift */; };
+		1EB9EE77204E909B00DBA0AE /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB9EE76204E909B00DBA0AE /* Word.swift */; };
+		1EB9EE7B204E935D00DBA0AE /* Translatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB9EE7A204E935D00DBA0AE /* Translatable.swift */; };
+		1EB9EE7D204E938300DBA0AE /* WordRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB9EE7C204E938300DBA0AE /* WordRepresentable.swift */; };
+		1EB9EE80204EB52700DBA0AE /* BDRealmTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB9EE7E204EB52600DBA0AE /* BDRealmTranslation.swift */; };
+		1EB9EE81204EB52700DBA0AE /* BDRealmWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB9EE7F204EB52600DBA0AE /* BDRealmWord.swift */; };
+		1EB9EE83204EFD2200DBA0AE /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB9EE82204EFD2200DBA0AE /* Translation.swift */; };
+		1EB9EE85204EFD7500DBA0AE /* TranslationWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB9EE84204EFD7500DBA0AE /* TranslationWord.swift */; };
 		1EE3CA602046C39B004F9356 /* ModelsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE3CA5F2046C39B004F9356 /* ModelsSpec.swift */; };
 		1EE3CA642046F3F6004F9356 /* String+validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE3CA632046F3F6004F9356 /* String+validation.swift */; };
 		1EE3CA66204701B3004F9356 /* BDRealmStorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE3CA65204701B3004F9356 /* BDRealmStorageError.swift */; };
@@ -39,11 +47,19 @@
 		1E159BE5203B15BC001B9FD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1E159BEA203B15BC001B9FD6 /* BantuDicoHistoryRealmStorageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BantuDicoHistoryRealmStorageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E159BF1203B15BC001B9FD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1E159BFC203B2F99001B9FD6 /* RealmTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTranslation.swift; sourceTree = "<group>"; };
+		1E159BFC203B2F99001B9FD6 /* Translation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
 		1E159BFF203B31F5001B9FD6 /* BantuDicoHistoryRealmStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BantuDicoHistoryRealmStorage.swift; sourceTree = "<group>"; };
-		1E159C01203B3AC3001B9FD6 /* BDRealmTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDRealmTranslation.swift; sourceTree = "<group>"; };
 		1EB9EE63204943C900DBA0AE /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		1EB9EE65204D3CD900DBA0AE /* DataBaseSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseSpec.swift; sourceTree = "<group>"; };
+		1EB9EE72204E839400DBA0AE /* Persistable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistable.swift; sourceTree = "<group>"; };
+		1EB9EE74204E86EC00DBA0AE /* Modelable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modelable.swift; sourceTree = "<group>"; };
+		1EB9EE76204E909B00DBA0AE /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
+		1EB9EE7A204E935D00DBA0AE /* Translatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translatable.swift; sourceTree = "<group>"; };
+		1EB9EE7C204E938300DBA0AE /* WordRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordRepresentable.swift; sourceTree = "<group>"; };
+		1EB9EE7E204EB52600DBA0AE /* BDRealmTranslation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDRealmTranslation.swift; sourceTree = "<group>"; };
+		1EB9EE7F204EB52600DBA0AE /* BDRealmWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDRealmWord.swift; sourceTree = "<group>"; };
+		1EB9EE82204EFD2200DBA0AE /* Translation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
+		1EB9EE84204EFD7500DBA0AE /* TranslationWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationWord.swift; sourceTree = "<group>"; };
 		1EE3CA5F2046C39B004F9356 /* ModelsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelsSpec.swift; sourceTree = "<group>"; };
 		1EE3CA632046F3F6004F9356 /* String+validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+validation.swift"; sourceTree = "<group>"; };
 		1EE3CA65204701B3004F9356 /* BDRealmStorageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDRealmStorageError.swift; sourceTree = "<group>"; };
@@ -103,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				1E159BE4203B15BC001B9FD6 /* BantuDicoHistoryRealmStorage.h */,
+				1EB9EE71204E82B300DBA0AE /* Protocols */,
 				1EE3CA622046F3DC004F9356 /* Extensions */,
 				1E159BFB203B2EDE001B9FD6 /* Models */,
 				1E159BFE203B31EA001B9FD6 /* Core */,
@@ -114,6 +131,8 @@
 		1E159BEE203B15BC001B9FD6 /* BantuDicoHistoryRealmStorageTests */ = {
 			isa = PBXGroup;
 			children = (
+				1EB9EE82204EFD2200DBA0AE /* Translation.swift */,
+				1EB9EE84204EFD7500DBA0AE /* TranslationWord.swift */,
 				1EE3CA5F2046C39B004F9356 /* ModelsSpec.swift */,
 				1EB9EE65204D3CD900DBA0AE /* DataBaseSpec.swift */,
 				1E159BF1203B15BC001B9FD6 /* Info.plist */,
@@ -124,8 +143,10 @@
 		1E159BFB203B2EDE001B9FD6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1E159BFC203B2F99001B9FD6 /* RealmTranslation.swift */,
-				1E159C01203B3AC3001B9FD6 /* BDRealmTranslation.swift */,
+				1E159BFC203B2F99001B9FD6 /* Translation.swift */,
+				1EB9EE76204E909B00DBA0AE /* Word.swift */,
+				1EB9EE7E204EB52600DBA0AE /* BDRealmTranslation.swift */,
+				1EB9EE7F204EB52600DBA0AE /* BDRealmWord.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -139,6 +160,17 @@
 				1EB9EE63204943C900DBA0AE /* Result.swift */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		1EB9EE71204E82B300DBA0AE /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				1EB9EE72204E839400DBA0AE /* Persistable.swift */,
+				1EB9EE74204E86EC00DBA0AE /* Modelable.swift */,
+				1EB9EE7A204E935D00DBA0AE /* Translatable.swift */,
+				1EB9EE7C204E938300DBA0AE /* WordRepresentable.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		1EE3CA622046F3DC004F9356 /* Extensions */ = {
@@ -382,13 +414,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E159C02203B3AC3001B9FD6 /* BDRealmTranslation.swift in Sources */,
+				1EB9EE75204E86EC00DBA0AE /* Modelable.swift in Sources */,
 				1E159C00203B31F5001B9FD6 /* BantuDicoHistoryRealmStorage.swift in Sources */,
-				1E159BFD203B2F99001B9FD6 /* RealmTranslation.swift in Sources */,
+				1EB9EE73204E839400DBA0AE /* Persistable.swift in Sources */,
+				1E159BFD203B2F99001B9FD6 /* Translation.swift in Sources */,
 				1EE3CA642046F3F6004F9356 /* String+validation.swift in Sources */,
+				1EB9EE80204EB52700DBA0AE /* BDRealmTranslation.swift in Sources */,
+				1EB9EE7B204E935D00DBA0AE /* Translatable.swift in Sources */,
 				1EB9EE64204943C900DBA0AE /* Result.swift in Sources */,
+				1EB9EE77204E909B00DBA0AE /* Word.swift in Sources */,
 				1EE3CA68204810EF004F9356 /* BDRealmTranslationError.swift in Sources */,
 				1EE3CA66204701B3004F9356 /* BDRealmStorageError.swift in Sources */,
+				1EB9EE7D204E938300DBA0AE /* WordRepresentable.swift in Sources */,
+				1EB9EE81204EB52700DBA0AE /* BDRealmWord.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,7 +435,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1EE3CA602046C39B004F9356 /* ModelsSpec.swift in Sources */,
+				1EB9EE85204EFD7500DBA0AE /* TranslationWord.swift in Sources */,
 				1EB9EE66204D3CD900DBA0AE /* DataBaseSpec.swift in Sources */,
+				1EB9EE83204EFD2200DBA0AE /* Translation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
